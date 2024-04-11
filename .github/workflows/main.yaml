@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lambda-artifacts
-          path: ./Lambda/*
+          path: ${{ inputs.working_directory }}/*
 
  
   deploy:
