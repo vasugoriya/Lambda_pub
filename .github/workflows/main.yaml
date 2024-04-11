@@ -51,8 +51,8 @@ jobs:
       - name: Install Dependencies
         run: cd Lambda && npm install
  
-      # - name: Build
-      #   run: cd Lambda && npm run build 
+      - name: Build
+        run: ls
  
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
