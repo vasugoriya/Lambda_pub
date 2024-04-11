@@ -49,15 +49,17 @@ jobs:
           node-version: '18'
  
       - name: Install Dependencies
-        run: cd Lambda && npm install
-        working-directory: ${{ inputs.working_directory }}
+        run: cd ${{ inputs.working_directory }} && npm install
+
+      - name: pwd
+        run: ls
  
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: lambda-artifacts
           path: ./Lambda/*
-          working-directory: ${{ inputs.working_directory }}
+
  
   deploy:
     name: Code Deploy
@@ -71,16 +73,13 @@ jobs:
         with:
           name: lambda-artifacts
           path: ./
- 
-      - name: pwd
-        run: ls
 
-      - name: Setup AWS CLI
-        uses: aws-actions/configure-aws-credentials@v3
+      - name: Log in to AWS using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        if: ${{ inputs.use_oidc == 'true' }}
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
+          aws-region: ${{ inputs.aws_region }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_NUMBER }}:role/${{ secrets.AWS_ASSUME_ROLE }}
  
       - name: Update Lambda Function Code
         run: |
