@@ -50,15 +50,18 @@ jobs:
  
       - name: Install Dependencies
         run: cd Lambda && npm install
+        working-directory: ${{ inputs.working_directory }}
  
       - name: Build
         run: ls
+        working-directory: ${{ inputs.working_directory }}
  
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: lambda-artifacts
           path: ./node_modules
+          working-directory: ${{ inputs.working_directory }}
  
   deploy:
     name: Code Deploy
