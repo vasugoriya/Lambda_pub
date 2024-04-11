@@ -49,7 +49,7 @@ jobs:
           node-version: '18'
  
       - name: Install Dependencies
-        run: npm install
+        run: cd Lambda && npm install
  
       - name: Build
         run: npm run build 
