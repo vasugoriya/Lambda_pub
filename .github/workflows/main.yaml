@@ -3,7 +3,7 @@ name: Dev Provisioning and Lambda Deployment
 on:
   push:
     branches:
-      - 'Dev'
+      - 'main'
   workflow_call:
     inputs:
       environment:
