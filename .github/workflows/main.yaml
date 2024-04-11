@@ -39,7 +39,7 @@ jobs:
       name: ${{ inputs.environment }}
     defaults:
       run:
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: Lambda
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
