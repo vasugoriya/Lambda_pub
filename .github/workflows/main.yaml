@@ -52,10 +52,6 @@ jobs:
         run: cd Lambda && npm install
         working-directory: ${{ inputs.working_directory }}
  
-      - name: Build
-        run: pwd
-        working-directory: ${{ inputs.working_directory }}
- 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -74,8 +70,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: lambda-artifacts
-          path: ./Layers
+          path: ./
  
+      - name: pwd
+        run: ls && pwd
+
       - name: Setup AWS CLI
         uses: aws-actions/configure-aws-credentials@v3
         with:
