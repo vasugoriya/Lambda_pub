@@ -52,7 +52,7 @@ jobs:
         run: cd Lambda && npm install
  
       - name: Build
-        run: npm run build 
+        run: cd Lambda && npm run build 
  
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
