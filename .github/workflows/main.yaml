@@ -52,7 +52,7 @@ jobs:
           node-version: '18'
  
       - name: Install Dependencies
-        run: cd ${{ inputs.working_directory }} && npm install
+        run: cd${{ inputs.working_directory }} && npm install
 
       - name: pwd
         run: ls
