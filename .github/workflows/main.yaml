@@ -13,7 +13,7 @@ on:
       working_directory:
         type: string
         description: "The directory where code resides"
-        default: "Lambda"
+        default: "./Lambda"
       lambda_function_name:
         type: string
         description: "Name of the Lambda function to deploy"
@@ -37,6 +37,9 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.working_directory }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
