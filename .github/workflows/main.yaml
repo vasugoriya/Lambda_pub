@@ -73,7 +73,7 @@ jobs:
           path: ./
  
       - name: pwd
-        run: ls && pwd
+        run: ls
 
       - name: Setup AWS CLI
         uses: aws-actions/configure-aws-credentials@v3
