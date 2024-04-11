@@ -1,7 +1,9 @@
-name: Deploy lambda function
-run-name: Deploy ${{ inputs.environment }} Lambda function
- 
+name: Dev Provisioning and Lambda Deployment
+
 on:
+  push:
+    branches:
+      - 'Dev'
   workflow_call:
     inputs:
       environment:
@@ -15,16 +17,22 @@ on:
       working_directory:
         type: string
         description: "The directory where code resides"
-        default: "./Lambda"
+        default: "./Layers"
       lambda_function_name:
         type: string
         description: "Name of the Lambda function to deploy"
+      aws_region:
+        type: string
+        description: "If using AWS, the region to target. Defaults to us-east-1."
+        default: "us-west-2"
+      use_oidc:
+        type: string
+        description: "Use the OIDC provider to authenticate the provisioning process"
+        default: "false"
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
       AWS_SECRET_ACCESS_KEY:
-        required: true
-      AWS_DEFAULT_REGION:
         required: true
  
 jobs:
@@ -65,7 +73,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: lambda-artifacts
-          path: ./Lambda
+          path: ./Layers
  
       - name: Setup AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
