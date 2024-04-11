@@ -53,14 +53,14 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
  
       - name: Build
-        run: ls
+        run: cd Lambda && ls
         working-directory: ${{ inputs.working_directory }}
  
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: lambda-artifacts
-          path: ./node_modules
+          path: ./Lambda/node_modules
           working-directory: ${{ inputs.working_directory }}
  
   deploy:
