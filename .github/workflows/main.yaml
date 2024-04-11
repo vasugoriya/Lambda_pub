@@ -52,7 +52,7 @@ jobs:
           node-version: '18'
  
       - name: Install Dependencies
-        run: cd${{ inputs.working_directory }} && npm install
+        run: npm install
 
       - name: pwd
         run: ls
@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lambda-artifacts
-          path: ${{ inputs.working_directory }}/*
+          path: /*
 
  
   deploy:
